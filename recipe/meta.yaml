@@ -17,6 +17,7 @@ requirements:
 test:
     commands:
         - csabathy -V
+        - conda inspect linkages -n _test csa  # [linux]
 
 about:
     home: https://github.com/sakov/csa-c
