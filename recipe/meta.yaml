@@ -1,28 +1,27 @@
+{% set version = "1.22.0" %}
+
 package:
     name: csa
-    version: 1.22.0
+    version: {{ version }}
 
 source:
-    git_url: https://github.com/sakov/csa-c.git
-    git_tag: v1.22.0
+    fn: v{{ version }}.tar.gz
+    url: https://github.com/sakov/csa-c/archive/v{{ version }}.tar.gz
+    sha256: b6d6ebeea146e09fc7aef827a3a3b22b7af674c2f0c67169c2275237e54c0c02
 
 build:
-    number: 0
+    number: 1
     skip: True  # [win]
-
-requirements:
-    run:
-        - libgcc
 
 test:
     commands:
         - csabathy -V
-        - conda inspect linkages -n _test csa  # [linux]
+        - conda inspect linkages -n _test csa  # [not win]
 
 about:
     home: https://github.com/sakov/csa-c
-    license: Simplified BSD
-    summary: Cubic Spline Approximation
+    license: BSD 2-Clause
+    summary: 'Cubic Spline Approximation.'
 
 extra:
     recipe-maintainers:
