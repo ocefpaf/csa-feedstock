@@ -1,28 +1,33 @@
 {% set version = "1.22.0" %}
 
 package:
-    name: csa
-    version: {{ version }}
+  name: csa
+  version: {{ version }}
 
 source:
-    fn: v{{ version }}.tar.gz
-    url: https://github.com/sakov/csa-c/archive/v{{ version }}.tar.gz
-    sha256: b6d6ebeea146e09fc7aef827a3a3b22b7af674c2f0c67169c2275237e54c0c02
+  fn: v{{ version }}.tar.gz
+  url: https://github.com/sakov/csa-c/archive/v{{ version }}.tar.gz
+  sha256: b6d6ebeea146e09fc7aef827a3a3b22b7af674c2f0c67169c2275237e54c0c02
 
 build:
-    number: 1
-    skip: True  # [win]
+  number: 2
+  skip: True  # [win]
+
+requirements:
+  build:
+    - toolchain
 
 test:
-    commands:
-        - csabathy -V
-        - conda inspect linkages -n _test csa  # [not win]
+  commands:
+    - csabathy -V
+    - conda inspect linkages -p $PREFIX csa  # [not win]
+    - conda inspect objects -p $PREFIX csa  # [osx]
 
 about:
-    home: https://github.com/sakov/csa-c
-    license: BSD 2-Clause
-    summary: 'Cubic Spline Approximation.'
+  home: https://github.com/sakov/csa-c
+  license: BSD 2-Clause
+  summary: 'Cubic Spline Approximation.'
 
 extra:
-    recipe-maintainers:
-        - ocefpaf
+  recipe-maintainers:
+    - ocefpaf
